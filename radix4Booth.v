@@ -1,10 +1,11 @@
-module radix4Booth (input [31:0] a, input [31:0] b, output [63:0] result);
+module radix4Booth (input [31:0] a, input [31:0] b, output [63:0] result, output overflow);
   reg [2:0] selectors [0:15];
   reg [63:0] products [0:15];
   wire [63:0] aux [0:14];
   wire [31:0] firstInputShifted;
   wire [31:0] firstInputComplement;
   wire [31:0] firstInputComplementShifted;
+  assign overflow = (a[31] ^ b[31])^result[63];
   assign firstInputShifted = a << 1'b1;
   assign firstInputComplement = ~a + 1'b1;
   assign firstInputComplementShifted = firstInputComplement << 1'b1;
