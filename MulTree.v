@@ -5,7 +5,7 @@ module miltiplierTree (
 	output wire overflowFlag
 );
 	
-	wire [63:0] p_prods [31:0] ;
+	wire [63:0] p_prods [32:0] ;
 	integer i;
 	
 	partial_products pp (a, b, p_prods);
@@ -74,14 +74,19 @@ module miltiplierTree (
 
 	FA_64 l81 (sum_l71[63:0], cout_l71[63:0], cout_l35[63:0], sum_l81[63:0], cout_l81[63:0]);
 
+
+	wire [63:0] sum_l91, cout_l91;
+
+	FA_64 l91 (sum_l81[63:0], cout_l81[63:0], p_prods[32], sum_l91[63:0], cout_l91[63:0]);
+
 	// The following is for level 9 of the multiplier tree
 
 
 	 wire c;
 	wire c2;
-	 Carry_plus l91 (sum_l81[31:0], cout_l81[31:0], 1'b0, out[31:0], c);
-	 Carry_plus l92 ( sum_l81[63:32], cout_l81[63:32], c, out[63:32], c2);
+	 Carry_plus l101 (sum_l91[31:0], cout_l91[31:0], 1'b0, out[31:0], c);
+	 Carry_plus l102 ( sum_l91[63:32], cout_l91[63:32], c, out[63:32], c2);
 
-    	 assign OverFlowFlag = (a[31]==b[31] && a[31] !== out[63] )? 1'b1 : 1'b0;
+    	 assign overflowFlag = (a[31]==b[31] && a[31] !== out[63] )? 1'b1 : 1'b0;
 
 endmodule

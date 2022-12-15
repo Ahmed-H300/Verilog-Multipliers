@@ -1,7 +1,7 @@
 module XMult (
-	input  [31:0] a,
-	input [31:0] b,
-	output [63:0] out,
+	input wire signed  [31:0] a,
+	input wire signed [31:0] b,
+	output wire signed [63:0] out,
 	output wire overflowFlag
 );
 assign out= a*b;
