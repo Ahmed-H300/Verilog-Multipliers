@@ -12,11 +12,21 @@ module radix4Booth (input [31:0] a, input [31:0] b, output [63:0] result, output
   integer j;
   genvar k;
   assign aux[0] = products[0];
-  generate
-  	for(k = 1; k < 15; k = k + 1)
- 		carrySelectAdder #(64)adder(aux[k-1],products[k],1'b0,aux[k], carry, overflow);
-  endgenerate
-  carrySelectAdder #(64)finalAdder(aux[14],products[15],1'b0,result, carry, overflow);
+  assign aux[1] = aux[0] + products[1];
+  assign aux[2] = aux[1] + products[2];
+  assign aux[3] = aux[2] + products[3];
+  assign aux[4] = aux[3] + products[4];
+  assign aux[5] = aux[4] + products[5];
+  assign aux[6] = aux[5] + products[6];
+  assign aux[7] = aux[6] + products[7];
+  assign aux[8] = aux[7] + products[8];
+  assign aux[9] = aux[8] + products[9];
+  assign aux[10] = aux[9] + products[10];
+  assign aux[11] = aux[10] + products[11];
+  assign aux[12] = aux[11] + products[12];
+  assign aux[13] = aux[12] + products[13];
+  assign aux[14] = aux[13] + products[14];
+  assign result = aux[14] + products[15];
   always @(a or b) begin
     selectors[0] = {b[1], b[0], 1'b0};
     for(i = 1; i < 16; i = i +1) 
