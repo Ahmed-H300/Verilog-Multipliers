@@ -1,4 +1,4 @@
-module radix4Booth (input [31:0] a, input [31:0] b, output [63:0] result, output carry, output overflow);
+module radix4Booth (input [31:0] a, input [31:0] b, output [63:0] result);
   reg [2:0] selectors [0:15];
   reg [63:0] products [0:15];
   wire [63:0] aux [0:14];

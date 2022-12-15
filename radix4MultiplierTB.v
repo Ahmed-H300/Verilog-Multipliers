@@ -1,9 +1,8 @@
 module radix4MultiplierTB;
 reg [31:0] a, b;
 wire [63:0] radix4BoothMultResult;
-wire carryRadix4Booth, overflowRadix4Booth;
 reg clk;
-radix4BoothWithRegs radix4BoothWithRegsInst(a, b, clk, radix4BoothMultResult, carryRadix4Booth, overflowRadix4Booth);
+radix4BoothWithRegs radix4BoothWithRegsInst(a, b, clk, radix4BoothMultResult);
 integer passed, failed;
 initial begin
 	passed = 0;
@@ -17,7 +16,7 @@ initial begin
 		$display("TestCase#1: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#1: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#1: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = 2;
     b = 3;
@@ -27,7 +26,7 @@ initial begin
 		$display("TestCase#2: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#2: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#2: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = -12;
     b = -4;
@@ -37,7 +36,7 @@ initial begin
 		$display("TestCase#3: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#3: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#3: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = -9;
     b = 5;
@@ -47,7 +46,7 @@ initial begin
 		$display("TestCase#4: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#4: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#4: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = 11;
     b = 0;
@@ -57,7 +56,7 @@ initial begin
 		$display("TestCase#5: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#5: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#5: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = 10;
     b = 1;
@@ -67,7 +66,7 @@ initial begin
 		$display("TestCase#6: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#6: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#6: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = 4;
     b = 6;
@@ -77,7 +76,7 @@ initial begin
 		$display("TestCase#7: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#7: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#7: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	a = -1;
     b = -7;
@@ -87,7 +86,7 @@ initial begin
 		$display("TestCase#8: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#8: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: %d", a, b, radix4BoothMultResult, overflowRadix4Booth);
+		$display("TestCase#8: failed with Input %d, %d, Output radix4Booth: %d, Overflow radix4Booth: ", a, b);
 	end
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
 end
