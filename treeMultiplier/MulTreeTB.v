@@ -3,7 +3,7 @@ reg signed [31:0] a, b;
 wire signed [63:0] MulTreeResult;
 wire overflowMulTree;
 reg clk, reset, en;
-miltiplierTree MulTree(a, b, MulTreeResult, overflowMulTree);
+MulTreeWithRegs MulTreeWithRegsInst(a, b, clk, reset, en, MulTreeResult, overflowMulTree);
 integer passed, failed;
 initial begin
 	clk = 1;
@@ -13,6 +13,7 @@ initial begin
 	en = 1;
 	#50;
 	#50;
+	reset = 0;
 	a = 5;
     b = -7;
 	#50;
