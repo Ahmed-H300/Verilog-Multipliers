@@ -1,7 +1,5 @@
-module boothmultiplier (input [31:0] m, input [31:0] q, output [63:0] result, output overflow);
+module boothmultiplier (input [31:0] m, input [31:0] q, output [63:0] result);
 integer i;
-
-assign overflow = (m[31] ^ q[31])^result[63];
 
 reg signed [64:0]res=0;
 assign result = res[64:1];

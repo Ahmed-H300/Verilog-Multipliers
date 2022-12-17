@@ -9,7 +9,6 @@ add wave reset
 add wave en
 add wave passed
 add wave failed
-add wave overflowboothmultiplier
 add wave -color #00eaff boothmultiplierResult
 run 1100
 

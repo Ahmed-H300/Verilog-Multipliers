@@ -1,8 +1,7 @@
 module miltiplierTree (
 	input  [31:0] a,
 	input [31:0] b,
-	output [63:0] out,
-	output wire overflowFlag
+	output [63:0] out
 );
 	
 	wire [63:0] p_prods [32:0] ;
@@ -86,7 +85,5 @@ module miltiplierTree (
 	wire c2;
 	 Carry_plus l101 (sum_l91[31:0], cout_l91[31:0], 1'b0, out[31:0], c);
 	 Carry_plus l102 ( sum_l91[63:32], cout_l91[63:32], c, out[63:32], c2);
-
-    	 assign overflowFlag = (a[31]==b[31] && a[31] !== out[63] )? 1'b1 : 1'b0;
 
 endmodule

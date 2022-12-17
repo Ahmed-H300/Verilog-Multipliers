@@ -2,8 +2,7 @@ module sequentialmultiplierTB;
 reg signed [31:0] a, b;
 wire signed [63:0] sequentialmultiplierResult;
 reg clk, reset, en;
-wire overflowsequentialmultiplier;
-sequentialmultiplier_withregs SMTB(a, b, clk, reset, en, sequentialmultiplierResult, overflowsequentialmultiplier);
+sequentialmultiplier_withregs SMTB(a, b, clk, reset, en, sequentialmultiplierResult);
 integer passed, failed;
 initial begin
 	passed = 0;
@@ -23,7 +22,7 @@ initial begin
 		$display("TestCase#1: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#1: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#1: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = 2;
     b = 3;
@@ -34,7 +33,7 @@ initial begin
 		$display("TestCase#2: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#2: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#2: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = -12;
     b = -4;
@@ -45,7 +44,7 @@ initial begin
 		$display("TestCase#3: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#3: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#3: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = -9;
     b = 5;
@@ -56,7 +55,7 @@ initial begin
 		$display("TestCase#4: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#4: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#4: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = 11;
     b = 0;
@@ -67,7 +66,7 @@ initial begin
 		$display("TestCase#5: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#5: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#5: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = 10;
     b = 1;
@@ -78,7 +77,7 @@ initial begin
 		$display("TestCase#6: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#6: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#6: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = 4;
     b = 6;
@@ -89,7 +88,7 @@ initial begin
 		$display("TestCase#7: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#7: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#7: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	a = -1;
     b = -7;
@@ -100,7 +99,7 @@ initial begin
 		$display("TestCase#8: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#8: failed with Input %d, %d, Output sequentialmultiplierResult: %d, sequential multiplier: %d", a, b, sequentialmultiplierResult, overflowsequentialmultiplier);
+		$display("TestCase#8: failed with Input %d, %d, Output sequentialmultiplierResult: %d", a, b, sequentialmultiplierResult);
 	end
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
 end

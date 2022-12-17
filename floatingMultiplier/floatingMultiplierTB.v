@@ -1,8 +1,9 @@
 module MULXTB;
 reg signed [31:0] a, b;
 wire signed [63:0] MulXResult;
+wire overflowMulX;
 reg clk, reset, en;
-MulXWithRegs MulXWithRegsInst(a, b, clk, reset, en, MulXResult);
+MulXWithRegs MulXWithRegsInst(a, b, clk, reset, en, MulXResult, overflowMulX);
 integer passed, failed;
 initial begin
 	clk = 1;
@@ -22,7 +23,7 @@ initial begin
 		$display("TestCase#1: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#1: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#1: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = 2;
     b = 3;
@@ -33,7 +34,7 @@ initial begin
 		$display("TestCase#2: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#2: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#2: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = -12;
     b = -4;
@@ -44,7 +45,7 @@ initial begin
 		$display("TestCase#3: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#3: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#3: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = -9;
     b = 5;
@@ -55,7 +56,7 @@ initial begin
 		$display("TestCase#4: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#4: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#4: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = 11;
     b = 0;
@@ -66,7 +67,7 @@ initial begin
 		$display("TestCase#5: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#5: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#5: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = 10;
     b = 1;
@@ -77,7 +78,7 @@ initial begin
 		$display("TestCase#6: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#6: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#6: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = 4;
     b = 6;
@@ -88,7 +89,7 @@ initial begin
 		$display("TestCase#7: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#7: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#7: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	a = -1;
     b = -7;
@@ -99,7 +100,7 @@ initial begin
 		$display("TestCase#8: success");
 	end else begin
 		failed = failed +1;
-		$display("TestCase#8: failed with Input %d, %d, Output MulXResult: %d", a, b, MulXResult);
+		$display("TestCase#8: failed with Input %d, %d, Output MulXResult: %d, Overflow X multiplier: %d", a, b, MulXResult, overflowMulX);
 	end
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
 end

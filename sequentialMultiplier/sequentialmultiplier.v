@@ -1,4 +1,4 @@
-module sequentialmultiplier (input [31:0] in1, input [31:0] in2, output [63:0] result, output overflow);
+module sequentialmultiplier (input [31:0] in1, input [31:0] in2, output [63:0] result);
 
 integer i;
 
@@ -8,8 +8,6 @@ wire [63:0] out;
 
 assign m = (in1[31] == 1) ? (-in1): in1;
 assign q = (in2[31] == 1) ? (-in2): in2;
-assign overflow = (in1[31] ^ in2[31])^result[63];
-
 reg [64:0]res=0;
 assign result = out;
 assign out = ((in1[31] ^ in2[31]) == 1) ? (-res[63:0]) : res[63:0];
