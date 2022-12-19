@@ -1,22 +1,23 @@
 module radix4MultiplierTB;
 reg [31:0] a, b;
 wire signed [63:0] radix4BoothMultResult;
-reg clk, reset, en;
-radix4BoothWithRegs radix4BoothWithRegsInst(a, b, clk, reset, en, radix4BoothMultResult);
+reg clk, reset, resetIntegration, en;
+radix4BoothWithRegs radix4BoothWithRegsInst(a, b, clk, reset, resetIntegration, en, radix4BoothMultResult);
 integer passed, failed;
 initial begin
+	// Clock cycle time = 20
 	passed = 0;
 	failed = 0;
-	clk = 1;
-	reset = 1;
+	clk = 0;
 	en = 1;
-	#50;
-	#50;
-	reset = 0;
 	a = 5;
     b = -7;
-	#50;
-	#50;
+	reset = 1;
+	resetIntegration = 1;
+	#20;
+	reset = 0;
+	resetIntegration = 0;
+	#340;
 	if (radix4BoothMultResult === -35) begin  
 		passed = passed + 1;
 		$display("TestCase#1: success");
@@ -26,8 +27,10 @@ initial begin
 	end
 	a = 2;
     b = 3;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 6) begin  
 		passed = passed + 1;
 		$display("TestCase#2: success");
@@ -37,8 +40,10 @@ initial begin
 	end
 	a = -12;
     b = -4;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 48) begin 
 		passed = passed + 1; 
 		$display("TestCase#3: success");
@@ -48,8 +53,10 @@ initial begin
 	end
 	a = -9;
     b = 5;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === -45) begin  
 		passed = passed + 1;
 		$display("TestCase#4: success");
@@ -59,8 +66,10 @@ initial begin
 	end
 	a = 11;
     b = 0;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 0) begin  
 		passed = passed + 1;
 		$display("TestCase#5: success");
@@ -70,8 +79,10 @@ initial begin
 	end
 	a = 10;
     b = 1;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 10) begin  
 		passed = passed + 1;
 		$display("TestCase#6: success");
@@ -81,8 +92,10 @@ initial begin
 	end
 	a = 4;
     b = 6;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 24) begin  
 		passed = passed + 1;
 		$display("TestCase#7: success");
@@ -92,8 +105,10 @@ initial begin
 	end
 	a = -1;
     b = -7;
-	#50;
-	#50;
+	reset = 1;
+	#20;
+	reset = 0;
+	#340;
 	if (radix4BoothMultResult === 7) begin  
 		passed = passed + 1;
 		$display("TestCase#8: success");
@@ -104,7 +119,7 @@ initial begin
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
 end
 always begin
-	#25;
+	#10;
 	clk = ~clk;
 end
 endmodule
