@@ -3,6 +3,7 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
   reg [63:0] aux;
   reg [4:0] j;
   reg [4:0] counter;
+  reg resetReg;
   wire [2:0] selectors [0:15];
   wire [31:0] firstInputShifted;
   wire [31:0] firstInputComplement;
@@ -32,6 +33,12 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
       if (reset === 1'b1) begin
         counter = 0;
         result = 0;
+        resetReg = 1;
+      end
+      else if (resetReg === 1'b1) begin
+        counter = 0;
+        result = 0;
+        resetReg = 0; // make it waits 1 cycle after reset is gone to 0 to get right data
       end
       else if (counter === 0) begin
         case(selectors[0])
@@ -61,10 +68,13 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
           product = product << 2'b10;  // shift left 2 bits
         aux = aux + product;
         counter = counter + 1;
+        if (counter === 5'd17) begin 
+          counter = 0;
+        end
         if (counter === 5'd16) begin 
           result = aux; // last iteration
-          counter = 0;
-          enableOutput = 1;
+          // make one cycle delay for getting input data right
+          enableOutput = 1; // write the previos result out to the out register
         end
       end
     end
