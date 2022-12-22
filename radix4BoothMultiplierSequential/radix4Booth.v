@@ -28,8 +28,8 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
   assign selectors[14] = {b[29], b[28], b[27]};
   assign selectors[15] = {b[31], b[30], b[29]};
   always @(posedge clk) begin
-    if (en === 1'b1) begin
       enableOutput = 0;
+    if (en === 1'b1) begin
       if (reset === 1'b1) begin
         counter = 0;
         result = 0;
@@ -77,6 +77,10 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
           enableOutput = 1; // write the previos result out to the out register
         end
       end
+    end
+    else begin
+      result = 64'bx;
+      enableOutput = 1;
     end
   end
 endmodule

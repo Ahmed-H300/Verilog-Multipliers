@@ -7,8 +7,8 @@ reg [64:0]res=0;
 assign result = res[64:1];
 
 always @(posedge clk) begin
-if (en === 1'b1) begin
 enableOutput = 0;
+if (en === 1'b1) begin
 if (reset === 1'b1) begin
 counter = 0;
 result = 0;
@@ -48,6 +48,10 @@ result = res; // last iteration
 enableOutput = 1; // write the previos result out to the out register
 end
 end
+end
+else begin
+result = 64'bx;
+enableOutput = 1;
 end
 end
 

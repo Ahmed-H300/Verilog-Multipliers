@@ -94,6 +94,8 @@ initial begin
 		$display("TestCase#7: failed with Input %d, %d, Output radix4Booth: %d", a, b, radix4BoothMultResult);
 	end
 	#320;
+	a = -547623;
+    b = 2;
 	#20;
 	if (radix4BoothMultResult === 7) begin  
 		passed = passed + 1;
@@ -101,6 +103,26 @@ initial begin
 	end else begin
 		failed = failed +1;
 		$display("TestCase#8: failed with Input %d, %d, Output radix4Booth: %d", a, b, radix4BoothMultResult);
+	end
+	#320;
+	a = 2147483647;
+	b = 3;
+	#20;
+	if (radix4BoothMultResult === -1095246) begin  
+		passed = passed + 1;
+		$display("TestCase#9: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#9: failed with Input %d, %d, Output radix4Booth: %d", a, b, radix4BoothMultResult);
+	end
+	#320;
+	#20;
+	if (radix4BoothMultResult === 64'd6442450941) begin  
+		passed = passed + 1;
+		$display("TestCase#10: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#10: failed with Input %d, %d, Output radix4Booth: %d", a, b, radix4BoothMultResult);
 	end
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
 end
