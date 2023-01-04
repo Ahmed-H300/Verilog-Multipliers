@@ -5,11 +5,13 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
   reg [4:0] counter;
   reg resetReg;
   wire [2:0] selectors [0:15];
-  wire [31:0] firstInputShifted;
-  wire [31:0] firstInputComplement;
-  wire [31:0] firstInputComplementShifted;
-  assign firstInputShifted = a << 1'b1;
-  assign firstInputComplement = ~a + 1'b1;
+  wire [63:0] auxA;
+  wire [63:0] firstInputShifted;
+  wire [63:0] firstInputComplement;
+  wire [63:0] firstInputComplementShifted;
+  assign auxA = {{32{a[31]}},a[31:0]};
+  assign firstInputShifted = auxA << 1'b1;
+  assign firstInputComplement = ~auxA + 1'b1;
   assign firstInputComplementShifted = firstInputComplement << 1'b1;
   assign selectors[0] = {b[1], b[0], 1'b0};
   assign selectors[1] = {b[3], b[2], b[1]};
@@ -44,10 +46,10 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
         case(selectors[0])
           3'b001: product = {{32{a[31]}},a[31:0]}; // 001 => put first input as it is
           3'b010: product = {{32{a[31]}},a[31:0]}; // 010 => put first input as it is
-          3'b011: product = {{32{firstInputShifted[31]}}, firstInputShifted}; // 011 => shift left first input by one (multiply by 2)
-          3'b100: product = {{32{firstInputComplementShifted[31]}},firstInputComplementShifted}; // 100 => sheft left 2's complement of first input by one (multiply by -2)
-          3'b101: product = {{32{firstInputComplement[31]}},firstInputComplement}; // 101 => put 2's complement of first input
-          3'b110: product = {{32{firstInputComplement[31]}},firstInputComplement}; // 110 => put 2's complement of first input
+          3'b011: product = firstInputShifted; // 011 => shift left first input by one (multiply by 2)
+          3'b100: product = firstInputComplementShifted; // 100 => sheft left 2's complement of first input by one (multiply by -2)
+          3'b101: product = firstInputComplement; // 101 => put 2's complement of first input
+          3'b110: product = firstInputComplement; // 110 => put 2's complement of first input
           default: product = 64'b0; // 000, 111 => put 0
         endcase
         aux = product;
@@ -57,10 +59,10 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
         case(selectors[counter])
         3'b001: product = {{32{a[31]}},a[31:0]}; // 001 => put first input as it is
         3'b010: product = {{32{a[31]}},a[31:0]}; // 010 => put first input as it is
-        3'b011: product = {{32{firstInputShifted[31]}}, firstInputShifted}; // 011 => shift left first input by one (multiply by 2)
-        3'b100: product = {{32{firstInputComplementShifted[31]}},firstInputComplementShifted}; // 100 => sheft left 2's complement of first input by one (multiply by -2)
-        3'b101: product = {{32{firstInputComplement[31]}},firstInputComplement}; // 101 => put 2's complement of first input
-        3'b110: product = {{32{firstInputComplement[31]}},firstInputComplement}; // 110 => put 2's complement of first input
+        3'b011: product = firstInputShifted; // 011 => shift left first input by one (multiply by 2)
+        3'b100: product = firstInputComplementShifted; // 100 => sheft left 2's complement of first input by one (multiply by -2)
+        3'b101: product = firstInputComplement; // 101 => put 2's complement of first input
+        3'b110: product = firstInputComplement; // 110 => put 2's complement of first input
         default: product = 64'b0; // 000, 111 => put 0
         endcase
         // if we add 100 + 101, we want to make it, 00100 + 10100, and every stage we shift more bits

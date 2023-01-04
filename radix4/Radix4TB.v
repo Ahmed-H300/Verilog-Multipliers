@@ -16,7 +16,7 @@ module Radix4TB;
 		.clk(clk), 
 		.inputA(en1), 
 		.inputB(en2), 
-		.outResult(out)
+		.out(out)
 	);
 always begin #1 clk = ~ clk ;end  //clock
 	initial begin

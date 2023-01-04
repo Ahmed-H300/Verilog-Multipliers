@@ -61,8 +61,8 @@ initial begin
 		$display("TestCase#4: failed with Input %h, %h, Output radix4Booth: %h", a, b, radix4BoothMultResult);
 	end
 	#320;
-	a = 32'hB887CAAF;
-    b = 32'h50647236;
+	a = 32'd1348760118;
+    b = -32'd1199060305;
 	#20;
 	if (radix4BoothMultResult === -143362716) begin  
 		passed = passed + 1;
@@ -75,7 +75,7 @@ initial begin
 	a = -259;
     b = -259;
 	#20;
-	if (radix4BoothMultResult === 64'hFDC57DE4938342EA) begin  
+	if (radix4BoothMultResult === -64'd1617244718460915990) begin  
 		passed = passed + 1;
 		$display("TestCase#6: success");
 	end else begin
