@@ -12,6 +12,187 @@ initial begin
 	failed = 0;
 	reset = 1;
 	en = 1;
+	a = 32'h49072340;
+    b = 32'h44520000; 
+	#20;
+	reset = 0;
+	#20;
+	#640;
+	a = 32'h4EA0C8E4;
+    b = 32'h4EA0C246; 
+	#20;
+	if (floatingPointResult === 32'h4DDDB5D5) begin
+		passed = passed + 1;
+		$display("TestCase#1: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#1: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'h49072340;
+    b = 32'hC3818000; 
+	#20;
+	if (floatingPointResult === 32'h5DC9EF25) begin
+		passed = passed + 1;
+		$display("TestCase#2: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#2: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'h4EA0C8E4;
+    b = 32'hCE8EF06B; 
+	#20;
+	if (floatingPointResult === 32'hCD08B8A9) begin
+		passed = passed + 1; 
+		$display("TestCase#3: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#3: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hC3818000;
+    b = 32'h49072340; 
+	#20;
+	if (floatingPointResult === 32'hDDB38CDC) begin 
+		passed = passed + 1;
+		$display("TestCase#4: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#4: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hCE8EF06B;
+    b = 32'h4EA0C8E4; 
+	#20;
+	if (floatingPointResult === 32'hCD08B8A9) begin  
+		passed = passed + 1;
+		$display("TestCase#5: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#5: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hC3818000;
+    b = 32'hC3818000;
+	#20;
+	if (floatingPointResult === 32'hDDB38CDC) begin
+		passed = passed + 1;
+		$display("TestCase#6: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#6: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hCE8EF06B;
+    b = 32'hCEEF06AA; 
+	#20;
+	if (floatingPointResult === 32'h47830480) begin
+		passed = passed + 1;
+		$display("TestCase#7: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#7: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'h3F800000;
+    b = 32'h4EA0C8E4; 
+	#20;
+	if (floatingPointResult === 32'h5E05762C) begin
+		passed = passed + 1;
+		$display("TestCase#8: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#8: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hCE8EF06B;
+    b = 32'h3F800000; 
+	#20;
+	if (floatingPointResult === 32'h4EA0C8E4) begin
+		passed = passed + 1;
+		$display("TestCase#9: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#9: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 0;
+    b = 32'h4EA0C8E4; 
+	#20;
+	if (floatingPointResult === 32'hCE8EF06B) begin
+		passed = passed + 1;
+		$display("TestCase#10: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#10: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hCE8EF06B;
+    b = 0; 
+	#20;
+	if (floatingPointResult === 0) begin
+		passed = passed + 1;
+		$display("TestCase#11: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#11: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'h3FFFFFF0;
+    b = 32'h41A00000; 
+	#20;
+	if (floatingPointResult === 0) begin
+		passed = passed + 1;
+		$display("TestCase#12: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#12: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'hBFFFFFFF;
+    b = 32'h41A00000; 
+	#20;
+	if (floatingPointResult === 32'b01111111100000000000000000000000) begin  // overflow = 1, sign = 0
+		passed = passed + 1;
+		$display("TestCase#13: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#13: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	a = 32'h35D00998;
+    b = 32'h800000; 
+	#20;
+	if (floatingPointResult === 32'b11111111100000000000000000000000) begin // overflow = 1, sign = 1
+		passed = passed + 1;
+		$display("TestCase#14: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#14: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	#640;
+	#20;
+	if (floatingPointResult === 32'h0000000D) begin
+		passed = passed + 1;
+		$display("TestCase#15: success");
+	end else begin
+		failed = failed +1;
+		$display("TestCase#15: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
+	end
+	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
+end
+always begin
+	#10;
+	clk = ~clk;
+end
+/* initial begin
+	// Clock cycle time = 20
+	clk = 0;
+	passed = 0;
+	failed = 0;
+	reset = 1;
+	en = 1;
 	a = 32'b01000000101001000000000000000000; // 5.125
     b = 32'b11000000111100000000000000000000; // -7.5
 	#20;
@@ -104,9 +285,5 @@ initial begin
 		$display("TestCase#8: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
 	end
 	$display("Total passed tests: %d and Total failed tests: %d", passed, failed);
-end
-always begin
-	#10;
-	clk = ~clk;
-end
+end */
 endmodule
