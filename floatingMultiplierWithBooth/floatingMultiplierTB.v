@@ -139,7 +139,7 @@ initial begin
 		$display("TestCase#11: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
 	end
 	#640;
-	a = 32'h3FFFFFF0;
+	a = 32'h7F7FFFF0;
     b = 32'h41A00000; 
 	#20;
 	if (floatingPointResult === 0) begin
@@ -150,7 +150,7 @@ initial begin
 		$display("TestCase#12: failed with Input %f, %f, Output floatingPointResult: %f, Overflow Floating Multiplier: %b, Exception Floating Multiplier: %b", a, b, floatingPointResult, overflowFloatingPoint, exceptionFloatingPoint);
 	end
 	#640;
-	a = 32'hBFFFFFFF;
+	a = 32'hFF7FFFF0;
     b = 32'h41A00000; 
 	#20;
 	if (floatingPointResult === 32'b01111111100000000000000000000000) begin  // overflow = 1, sign = 0
