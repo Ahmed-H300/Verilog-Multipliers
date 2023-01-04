@@ -88,16 +88,13 @@ registerNbits #(32) outB(clk, reset, enableOutput, outA_reg, result[2*N-1:N]);
 endmodule
 
 module floatingMultiplier (input [31:0] a, input [31:0] b, output [31:0] result, output exception, output overflow, input clk, input reset, input en, output enableOutput);
-//wire [63:0] tempMantissaProd;
 wire [47:0] tempMantissa;
 wire [7:0] tempExponent, resultExponent;
 wire [22:0] resultMantissa;
 wire isZero, sign;
 boothmultiplier boothInst({8'b00000000, {1'b1,a[22:0]}}, {8'b00000000, {1'b1,b[22:0]}}, clk, reset, en, tempMantissa, enableOutput);
-// boothmultiplier_withregs boothWithRegsInst({8'b00000000, {1'b1,a[22:0]}}, {8'b00000000, {1'b1,b[22:0]}}, clk, reset, 1'b1, tempMantissa, enableOutput); // we need to ignore most left 2 bits to remove unwanted 2 bits that resulted from prepending one to each mantissa
-//assign tempMantissa = tempMantissaProd[63:16];
 assign sign = a[31]^b[31];
-assign overflow = ((resultExponent[8] && !resultExponent[7]) && !isZero) === 1'b1 ? 1'b1 : 1'b0;
+assign overflow = ((resultExponent[8] && !resultExponent[7]) && !isZero) === 1'b1 ? 1'b1 : 1'b0; // exponent is too large
 assign exception = (&a[30:23]) || (&b[30:23]); // exception is 1 whenever any exponent is 255
 assign tempExponent = a[30:23]+b[30:23]-127; // we added 127 2 times, so remove one of them
 assign resultMantissa = tempMantissa[47] === 1'b0 ? tempMantissa[45:23] : tempMantissa[46:24]; // remove unwanted 2 bits that resulted from prepending one to each mantissa, or remove just 1 bit in case last bit is 1
