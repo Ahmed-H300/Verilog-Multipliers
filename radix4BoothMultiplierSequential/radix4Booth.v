@@ -66,8 +66,8 @@ module radix4Booth (input [31:0] a, input [31:0] b, input clk, input reset, inpu
         default: product = 64'b0; // 000, 111 => put 0
         endcase
         // if we add 100 + 101, we want to make it, 00100 + 10100, and every stage we shift more bits
-        for(j = 0; j < counter; j = j + 1)
-          product = product << 2'b10;  // shift left 2 bits
+        //for(j = 0; j < counter; j = j + 1)
+        product = product << (counter << 1'b1);  // shift left 2 bits
         aux = aux + product;
         counter = counter + 1;
         if (counter === 5'd17) begin 
